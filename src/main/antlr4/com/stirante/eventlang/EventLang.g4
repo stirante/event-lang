@@ -45,7 +45,7 @@ complex_test
     ;
 
 test
-   : (name '.')? name operator value
+   : (name '.')? name ('(' value ')')? operator value
    ;
 
 value
@@ -68,12 +68,12 @@ name
    ;
 
 QUOTE
-   : '\'' STRING '\''
-   | '"' STRING '"'
-   ;
+    : ('"' ( '\\"' | ~["] )* '"')
+    | ('\'' ( ~['] )* '\'')
+    ;
 
 STRING
-   : [a-zA-Z_][a-zA-Z0-9_]*
+   : [a-zA-Z_][a-zA-Z0-9_:]*
    ;
 
 INT

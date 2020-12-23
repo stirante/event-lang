@@ -42,8 +42,14 @@ public class TestVisitor extends EventLangBaseVisitor<Filter> {
         else {
             f.test = ctx.name(0).getText();
         }
+        if (ctx.value().size() == 2) {
+            f.domain = ParserUtils.valueToString(ctx.value(0));
+            f.value = ParserUtils.valueToString(ctx.value(1));
+        }
+        else {
+            f.value = ParserUtils.valueToString(ctx.value(0));
+        }
         f.operator = ctx.operator().getText();
-        f.value = ParserUtils.valueToString(ctx.value());
         return f;
     }
 }
